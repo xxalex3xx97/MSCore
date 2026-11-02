@@ -7,12 +7,15 @@
 [![Latest release](https://img.shields.io/github/v/release/xxalex3xx97/MSCore?style=for-the-badge&label=release)](https://github.com/xxalex3xx97/MSCore/releases/latest)
 ![Platform](https://img.shields.io/badge/platform-Windows-blue?style=for-the-badge)
 ![Game](https://img.shields.io/badge/game-Main%20Sequence%20Demo-orange?style=for-the-badge)
+[![Docs](https://img.shields.io/badge/docs-website-brightgreen?style=for-the-badge)](https://xxalex3xx97.github.io/MSCore/)
 
 **Install mods, keep them up to date, and remove them cleanly - from one small window.**
 
 </div>
 
 ---
+
+**📖 Documentation: https://xxalex3xx97.github.io/MSCore/** (player guide, Lua API, native API, publishing a mod)
 
 ## What is MSCore?
 
