@@ -55,8 +55,22 @@ The manager downloads that repository's latest release, checks the file hash and
 
 The manager never downloads anything when the game starts. It only checks. Downloads happen after you click a button.
 
+## Buttons at a glance
+
+| Button | What it does | Game must be closed? |
+|---|---|---|
+| **Install/Repair MSCore** | Copies UE4SS and MSCore into the game folder and adds `MSCore : 1` to `mods.txt`. Running it again repairs the files. | Yes |
+| **Add mod...** | Installs the latest release of `owner/repo` or a GitHub link. | Yes |
+| **Check** | Looks for newer versions. Downloads nothing. | No (not stated) |
+| **Update selected** | Downloads the new version of the selected mod. Applied at the next game start. | Applied on next start |
+| **Update all** | Same as Update selected, for every mod with an update. | Applied on next start |
+| **Rollback** | Restores the files kept from the last update of the selected mod. Restart the game after. | Yes |
+| **Remove mod** | Deletes only the files the manager installed for that mod. MSCore cannot be removed this way. | Yes |
+| **Browse game folder** | Lets you pick the `Main Sequence Demo` folder when the manager does not find it. | No (not stated) |
+
 ## 7. Start the game
 
-Load a world and wait about 8 seconds. MSCore writes `ue4ss\Mods\MSCore\selfcheck.log`. Open it to see whether the check passed. See [Troubleshooting]({{ site.baseurl }}/players/troubleshooting.html) if it did not.
+Load a world and wait about 8 seconds. MSCore writes `ue4ss\Mods\MSCore\selfcheck.log`. Open it to see whether the check passed. See [Troubleshooting]({% link players/troubleshooting.md %}) if it did not.
 
+{: .warning }
 **Not verified in game:** the in-game update notice line in the UE4SS log. The manager update flow was tested with the game closed.

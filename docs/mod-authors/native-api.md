@@ -1,19 +1,49 @@
 ---
-title: Native C API reference
+title: Native C API
 parent: Mod authors
 nav_order: 3
 ---
 
-# Native C API reference
+# Native C API
 
 The native part is `MSCore.dll`, installed as `ue4ss\Mods\MSCore\dlls\main.dll`. It exports C functions that other native mods (C++ UE4SS mods) can call with `GetProcAddress`.
 
-**Native API version: 2.** `MSCore_api()` returns `2`. Check it before you use the other exports. Use `MSCore_api` to decide if your mod can run. The MiningBenchMod refuses to load below 2.
+**Native API version: 2.** `MSCore_api()` returns `2`. Check it before you use the other exports. The MiningBenchMod refuses to load below 2.
 
-Status markers:
+Conventions: all exports use the C calling convention and are declared `extern "C"`. Pointers are game `UObject*` values as `void*`. Chunk and location arrays hold 3 `long long` values in `X, Y, Z` order.
 
-- Exports marked **in game (MiningBench)** were used by MiningBenchMod in game (note from 2026-11-02, mining loop ran through MSCore).
-- Exports marked **Not verified in game** were built and checked offline only.
+## Exports
+
+Every export, in the order of the groups below. Args are listed without the function name. Chunk = `ch3`, location = `arr3`, both `long long[3]`.
+
+| Export | Args | Returns | What it does | Status |
+|---|---|---|---|---|
+| `MSCore_api` | `void` | `int` (`2`) | Native API version. Check it first. | Not verified in game |
+| `MSCore_add_input` | `int receiver, void* cmd, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Sends `DMSPlayerController.AddInputCommand`. `receiver` = ship id. `cmd` = live input command UObject. Does not apply the ShipMovementInputCommand type id fix that `cmd.send` applies. | In game (MiningBench) |
+| `MSCore_view_send` | `int cid, long long yaw_raw, long long pitch_raw, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Sets the view offset. `cid` = PilotConsole ID. `yaw_raw` and `pitch_raw` are raw values, 65536 per degree. | In game (MiningBench) |
+| `MSCore_throttle` | `int sid, int delta, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Sends one ShipMovementInputCommand with `DeltaThrottle = delta`. `sid` = ship id. | In game (MiningBench) |
+| `MSCore_find_item` | `const char* res, wchar_t* why, int len` | `void*` (Item UObject, or `NULL`) | `res` = object name, display name (case-insensitive) or numeric ID as text. `NULL` with `why` set on zero or several matches. | Not verified in game |
+| `MSCore_find_dock` | `const char* name, wchar_t* why, int len` | `int` (dock id > 0; `-1` none; `-2` several) | `name` = in-game dock name (DisplayName). `why` says which case applies when there is no single match. | Not verified in game |
+| `MSCore_new_order` | `int receiver, const wchar_t* cls, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | `cls` = class name without the path, for example a DeliverOrder class name. `receiver` = ship id or parent order id. | Not verified in game |
+| `MSCore_update_order` | `int oid, int target, void* item, int cmp, int amount, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Updates order `oid`. `item` = Item UObject or `NULL`. `target` = dock or `0`. | Not verified in game |
+| `MSCore_delete_order` | `int sid, int oid, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Deletes order `oid` of ship `sid`. | Not verified in game |
+| `MSCore_autopilot` | `int sid, int on, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | `on`: `0` = off, any nonzero = on. | Not verified in game |
+| `MSCore_skip_to` | `int sid, int idx, int* before, int* after, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Jumps to order index `idx`. `before` and `after` receive `CurrentOrderIndex` around the call. Either pointer may be `NULL`. | Not verified in game |
+| `MSCore_filter_send` | `int sid, int idx, void* item, int amount, int action, int remove, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Sets logistic filter row `idx`. `action`: `0` = LIMIT, `1` = BUFFER. `remove != 0` removes row `idx`. `item` may be `NULL` (empty row). | Not verified in game |
+| `MSCore_filters_read` | `void* ship, MsFilterRow* out, int max` | `int` (row count, or `-1` on failure) | Copies `min(count, max)` rows into `out`. `out = NULL` or `max = 0`: count only. | Not verified in game |
+| `MSCore_warp_send` | `int sid, int sys, const long long* ch3, const long long* arr3, int wrap, int set_target, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Teleport warp for ship `sid` into system `sys`. `wrap != 0` wraps in piloting on/off. `set_target != 0` sets `bSetTarget` on the command. | Not verified in game |
+| `MSCore_arrival` | `void* ship, int sys, const long long* ch3, long long dist, long long* arr3, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | Jump arrival point in sector `ch3` of system `sys`. `dist` = warp arrival distance (raw). `arr3` receives the raw location. | Not verified in game |
+| `MSCore_jump_cost` | `void* ship, int sys, const long long* ch3, int* cost, wchar_t* err, int errlen` | `int` (1 ok, 0 fail) | `cost` receives the jump cost integer. | Not verified in game |
+| `MSCore_chunk_of` | `void* obj, long long* ch3` | `int` (1 ok, 0 fail) | Fills `ch3` with the chunk of `obj`. | Not verified in game |
+| `MSCore_axes_of` | `void* obj, const wchar_t* prop, long long* out3` | `int` (1 ok, 0 fail) | Fills `out3` with the X, Y, Z raw values of the struct property `prop` of `obj`. | Not verified in game |
+| `MSCore_sys_id` | `void* obj` | `int` (system id) | Solar system id of `obj`. `0` when unreadable. | Not verified in game |
+| `MSCore_sec_warp_dist` | `void* sec, long long* out` | `int` (1 ok, 0 fail) | Writes `GenParams.WarpArrivalDistance` (raw) of the sector to `*out`. | Not verified in game |
+| `MSCore_sectors` | `MsSector* out, int max` | `int` (total found, or `-1` on exception) | Writes every SolarSystemSector into `out[0..max)`. `out = NULL` or `max = 0`: count only. | Not verified in game |
+| `MSCore_pin_ensure` | `void` | `int` (1 when armed) | Arms the map pin hook. Call every tick until it returns `1`. The controller does not exist when the mod loads. | Not verified in game |
+| `MSCore_pinned` | `void` | `int` (sector id, `0` = none) | Last map-pinned sector id. | Not verified in game |
+
+{: .warning }
+**Not for mods:** `start_mod` and `uninstall_mod` are the UE4SS entry points of the DLL. Do not call them.
 
 ## Error convention
 
@@ -28,123 +58,17 @@ Functions with a `why` buffer (`MSCore_find_item`, `MSCore_find_dock`) use the s
 
 Functions that take a `void* obj` check that the object is alive before they use it. A dead object returns `0`, `NULL` or `-1`, depending on the function.
 
-## Exports
-
-All exports use the C calling convention and are declared `extern "C"`. Pointers are game `UObject*` values as `void*`. Chunk and location arrays hold 3 `long long` values in `X, Y, Z` order.
-
-### Version
-
-```c
-int MSCore_api(void);   // returns 2
-```
-
-### Ship commands (in game, MiningBench)
-
-```c
-int MSCore_add_input(int receiver, void* cmd, wchar_t* err, int errlen);
-// receiver = ship id. cmd = live input command UObject. Sends DMSPlayerController.AddInputCommand.
-// Note: unlike the Lua cmd.send, this export does not apply the ShipMovementInputCommand type id fix.
-
-int MSCore_view_send(int cid, long long yaw_raw, long long pitch_raw, wchar_t* err, int errlen);
-// cid = PilotConsole ID. yaw_raw and pitch_raw are RAW values (65536 per degree). Lua steer.aim takes degrees.
-
-int MSCore_throttle(int sid, int delta, wchar_t* err, int errlen);
-// sid = ship id. Sends one ShipMovementInputCommand with DeltaThrottle = delta.
-```
-
-### Lookups
-
-```c
-void* MSCore_find_item(const char* res, wchar_t* why, int len);
-// res = object name, display name (case-insensitive) or numeric ID as text. Returns the Item UObject,
-// or NULL with `why` set on zero or several matches. Not verified in game.
-
-int MSCore_find_dock(const char* name, wchar_t* why, int len);
-// name = in-game dock name (DisplayName). Returns the dock id (> 0), -1 = none, -2 = several matches (`why` says which).
-// Not verified in game.
-```
-
-### Orders (not verified in game)
-
-```c
-int MSCore_new_order(int receiver, const wchar_t* cls, wchar_t* err, int errlen);
-// cls = class name without the path, for example a DeliverOrder class name. Receiver = ship id or parent order id.
-
-int MSCore_update_order(int oid, int target, void* item, int cmp, int amount, wchar_t* err, int errlen);
-// item = Item UObject or NULL. cmp and amount are integers. target = dock or 0.
-
-int MSCore_delete_order(int sid, int oid, wchar_t* err, int errlen);
-
-int MSCore_autopilot(int sid, int on, wchar_t* err, int errlen);
-// on: 0 = off, nonzero = on.
-
-int MSCore_skip_to(int sid, int idx, int* before, int* after, wchar_t* err, int errlen);
-// before and after receive CurrentOrderIndex around the call. Either pointer may be NULL.
-
-int MSCore_filter_send(int sid, int idx, void* item, int amount, int action, int remove, wchar_t* err, int errlen);
-// action: 0 = LIMIT, 1 = BUFFER. remove != 0 removes row idx. item may be NULL (empty row).
-
-int MSCore_filters_read(void* ship, MsFilterRow* out, int max);
-// Returns the number of logistic filter rows, or -1 on failure. Copies min(count, max) rows into out.
-// out = NULL or max = 0: count only.
-```
-
-### Warp and sectors (not verified in game)
-
-```c
-int MSCore_warp_send(int sid, int sys, const long long* ch3, const long long* arr3, int wrap, int set_target, wchar_t* err, int errlen);
-// ch3 = chunk {X,Y,Z}. arr3 = raw arrival location {X,Y,Z}. wrap != 0 wraps in piloting on/off.
-// set_target != 0 sets bSetTarget on the command.
-
-int MSCore_arrival(void* ship, int sys, const long long* ch3, long long dist, long long* arr3, wchar_t* err, int errlen);
-// Jump arrival point in sector ch3 of system sys. dist = warp arrival distance (raw). arr3 receives the raw location.
-
-int MSCore_jump_cost(void* ship, int sys, const long long* ch3, int* cost, wchar_t* err, int errlen);
-// cost receives the jump cost integer.
-
-int MSCore_chunk_of(void* obj, long long* ch3);
-// Returns 1 and fills ch3 with the chunk of obj, or 0.
-
-int MSCore_axes_of(void* obj, const wchar_t* prop, long long* out3);
-// Returns 1 and fills out3 with the X, Y, Z raw values of the struct property `prop` of obj, or 0.
-
-int MSCore_sys_id(void* obj);
-// Solar system id of obj, or 0 when unreadable.
-
-int MSCore_sec_warp_dist(void* sec, long long* out);
-// Returns 1 and writes GenParams.WarpArrivalDistance (raw) of the sector to *out, or 0.
-
-int MSCore_sectors(MsSector* out, int max);
-// Writes every SolarSystemSector into out[0..max). Returns the total found, or -1 on exception.
-// out = NULL or max = 0: count only.
-```
-
-### Map pin (not verified in game)
-
-```c
-int MSCore_pin_ensure(void);
-// Arms the map pin hook. Returns 1 when armed. Call every tick until it returns 1 (the controller
-// does not exist when the mod loads).
-
-int MSCore_pinned(void);
-// Last map-pinned sector id, 0 = none.
-```
-
-### Not for mods
-
-`start_mod` and `uninstall_mod` are the UE4SS entry points of the DLL. Do not call them.
-
 ## Structs
 
 Both structs use the default C packing of a 64-bit build. Declare them exactly like this in your code. The sizes are checked with `static_assert` in MSCore.
 
 ### MsFilterRow (16 bytes)
 
-| Offset | Field | Type |
-|---|---|---|
-| 0 | `item` | `void*` (Item UObject) |
-| 8 | `amount` | `int32_t` |
-| 12 | `action` | `int32_t` (0 LIMIT, 1 BUFFER) |
+| Offset | Field | Type | Notes |
+|---|---|---|---|
+| 0 | `item` | `void*` | Item UObject. |
+| 8 | `amount` | `int32_t` | |
+| 12 | `action` | `int32_t` | `0` LIMIT, `1` BUFFER. |
 
 ```cpp
 struct MsFilterRow { void* item; int32_t amount; int32_t action; };
@@ -154,15 +78,15 @@ struct MsFilterRow { void* item; int32_t amount; int32_t action; };
 
 | Offset | Size | Field | Notes |
 |---|---|---|---|
-| 0 | 4 | `id` | save id of the sector |
-| 4 | 4 | `sys` | solar system id |
-| 8 | 4 | `nores` | number of ore entries in `ores` |
-| 12 | 4 | `pad` | unused |
-| 16 | 24 | `ch[3]` | chunk X, Y, Z (`long long`) |
-| 40 | 24 | `he[3]` | half extents X, Y, Z (`long long`) |
-| 64 | 8 | `warp_dist` | warp arrival distance (raw) |
-| 72 | 320 | `ores[40]` | ore item UObject pointers, max 40 |
-| 392 | 192 | `name[96]` | display name, `wchar_t`, null-terminated |
+| 0 | 4 | `id` | Save id of the sector. |
+| 4 | 4 | `sys` | Solar system id. |
+| 8 | 4 | `nores` | Number of ore entries in `ores`. |
+| 12 | 4 | `pad` | Unused. |
+| 16 | 24 | `ch[3]` | Chunk X, Y, Z (`long long`). |
+| 40 | 24 | `he[3]` | Half extents X, Y, Z (`long long`). |
+| 64 | 8 | `warp_dist` | Warp arrival distance (raw). |
+| 72 | 320 | `ores[40]` | Ore item UObject pointers, max 40. |
+| 392 | 192 | `name[96]` | Display name, `wchar_t`, null-terminated. |
 
 ```cpp
 struct MsSector {
@@ -206,4 +130,8 @@ if (view_send && !view_send(cid, 0, 0, err, 256)) {
 
 `cid` is the pilot console id (`ID` property) of the ship's `PilotConsoleObject`.
 
-Status: **in game (MiningBench)** for `MSCore_add_input`, `MSCore_view_send`, `MSCore_throttle`. Everything else **Not verified in game**.
+## Gotchas
+
+- Always resolve `MSCore_api` first and stop if it returns less than `2`.
+- Use a 256 `wchar_t` buffer for `err` so you get the full reason.
+- The MSCore export `MSCore_add_input` skips the type id fix. The Lua `cmd.send` applies it.

@@ -16,10 +16,12 @@ nav_order: 2
 
 The manager writes only inside the game folder:
 
-- `Windows\MainSequence\Binaries\Win64\dwmapi.dll` and the `ue4ss` folder (Install/Repair).
-- `ue4ss\Mods\<Mod>\` and `ue4ss\Mods\mods.txt` (install, update, remove).
-- `Content\Paks\` for mods that ship `.pak` files.
-- `ue4ss\Mods\MSCore\` for MSCore's own files, backups and staged updates.
+| Path (inside the game folder) | Written when |
+|---|---|
+| `Windows\MainSequence\Binaries\Win64\dwmapi.dll` and the `ue4ss` folder | Install/Repair |
+| `ue4ss\Mods\<Mod>\` and `ue4ss\Mods\mods.txt` | Install, update, remove |
+| `Windows\MainSequence\Content\Paks\` | Mods that ship `.pak` files |
+| `ue4ss\Mods\MSCore\` | MSCore's own files, backups and staged updates |
 
 Zip paths must start with `Mods/` or `Paks/`. Paths with `..`, absolute paths and drive letters are refused.
 
@@ -35,7 +37,9 @@ These files are never replaced by an update:
 
 ## Removing a mod is limited
 
-**Remove mod** deletes only the files listed in that mod's install list. If an update had replaced one of those files, the manager puts the old file back from the backup first. Then it deletes that mod's backup, staged-update folder and its `mods.txt` line. Files owned by other mods, and your own files, are not touched.
+**Remove mod** deletes only the files listed in that mod's install list. If an update had replaced one of those files, the manager puts the old file back from the backup first. Then it deletes that mod's backup, staged-update folder and its `mods.txt` line.
+
+Files owned by other mods, and your own files, are not touched.
 
 ## Old backups
 

@@ -8,7 +8,7 @@ nav_order: 1
 
 ## 1. Install MSCore for testing
 
-Follow [Getting started]({{ site.baseurl }}/players/getting-started.html) for the manager, or copy the `Mods\MSCore` folder into `ue4ss\Mods\` by hand.
+Follow [Getting started]({% link players/getting-started.md %}) for the manager, or copy the `Mods\MSCore` folder into `ue4ss\Mods\` by hand.
 
 ## 2. Order in mods.txt
 
@@ -43,11 +43,11 @@ local id = MSCore.events.on("tick", function()  -- every 250 ms, game thread
 end)
 ```
 
-`events.on` only accepts `"tick"` in API 1. `events.off(id)` removes the callback.
+`events.on` only accepts `"tick"` in API 1. `events.off(id)` removes the callback. See [Events and loader]({% link mod-authors/lua-api/events-loader.md %}).
 
 ## 5. Check it runs
 
-Start the game, load a world, wait about 8 seconds, then read `Mods\MSCore\selfcheck.log`. Every line should be `OK` or `SKIP`. See [Troubleshooting]({{ site.baseurl }}/players/troubleshooting.html) for `BROKEN` and `CHANGED`.
+Start the game, load a world, wait about 8 seconds, then read `Mods\MSCore\selfcheck.log`. Every line should be `OK` or `SKIP`. See [Troubleshooting]({% link players/troubleshooting.md %}) for `BROKEN` and `CHANGED`.
 
 ## Rules to follow
 
@@ -56,4 +56,4 @@ Start the game, load a world, wait about 8 seconds, then read `Mods\MSCore\selfc
 - Read the game's class names from `MSCore.resolve`. Do not hard-code them in your mod.
 - Command functions send game input. Only call them on purpose.
 
-Full list of functions: [Lua API reference]({{ site.baseurl }}/mod-authors/lua-api.html).
+Full list of functions: [Lua API]({% link mod-authors/lua-api.md %}). Short list: [Quick reference]({% link quick-reference.md %}).
