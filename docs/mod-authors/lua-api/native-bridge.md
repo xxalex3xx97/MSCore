@@ -7,7 +7,7 @@ nav_order: 8
 
 # Native bridge
 
-`MSCore.native` is `nil` when the DLL is not loaded. Otherwise it has the fields below. Each one is the raw `MSCoreNative_*` global. For the C side of the same exports, see [Native C API]({% link mod-authors/native-api.md %}).
+`MSCore.native` is `nil` when the DLL is not loaded. Otherwise it has the fields below. Each one is the raw `MSCoreNative_*` global. For the C side of the same exports, see [Native C API]({{ site.baseurl }}{% link mod-authors/native-api.md %}).
 
 ## Functions
 

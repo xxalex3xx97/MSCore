@@ -11,7 +11,7 @@ nav_order: 5
 | **Mod loader** | The MSCore Manager plus UE4SS's `mods.txt` load list. The manager installs, updates and removes mods. UE4SS loads them when the game starts. |
 | **mods.txt** | `ue4ss\Mods\mods.txt`. One line per mod, `<ModName> : 1`. MSCore's line goes first. |
 | **enabled.txt** | An empty file in a mod folder. Its presence means the mod is loaded from `mods.txt`. Without it the manager asks you to add the line yourself. |
-| **Manifest** | `manifest.txt`, attached to a GitHub release. Lists the zip name, `sha256`, `size` and version. The manager reads it for update checks. See [Publishing]({% link mod-authors/publishing.md %}#manifesttxt). |
+| **Manifest** | `manifest.txt`, attached to a GitHub release. Lists the zip name, `sha256`, `size` and version. The manager reads it for update checks. See [Publishing]({{ site.baseurl }}{% link mod-authors/publishing.md %}#manifesttxt). |
 | **Latest release** | The GitHub release marked **Latest**. The manager reads `releases/latest`, so a release that is not marked Latest is not seen. |
 | **Pak** | Unreal's packed content: `.pak`, `.utoc` and `.ucas` files. They go to `Windows\MainSequence\Content\Paks\`. |
 | **Staged update** | An update the manager has downloaded and checked. It waits in `ue4ss\Mods\MSCore\updates\` and is applied at the next game start (`pending.txt`). |

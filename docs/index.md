@@ -24,12 +24,12 @@ Current version: **0.5.1** (Lua API 1, native API 2).
 
 | Area | Start here | Also see |
 |---|---|---|
-| Players | [Getting started]({% link players/getting-started.md %}) | [Safety]({% link players/safety.md %}), [Troubleshooting]({% link players/troubleshooting.md %}) |
-| Mod authors | [Quickstart]({% link mod-authors/quickstart.md %}) | [Mod authors overview]({% link mod-authors.md %}) |
-| API (Lua) | [Lua API]({% link mod-authors/lua-api.md %}) | [Quick reference]({% link quick-reference.md %}) |
-| API (native) | [Native C API]({% link mod-authors/native-api.md %}) | [Glossary]({% link glossary.md %}) |
-| Publishing | [Publishing a mod]({% link mod-authors/publishing.md %}) | [Release checklist]({% link mod-authors/publishing.md %}#release-checklist) |
-| History | [Changelog]({% link changelog.md %}) | |
+| Players | [Getting started]({{ site.baseurl }}{% link players/getting-started.md %}) | [Safety]({{ site.baseurl }}{% link players/safety.md %}), [Troubleshooting]({{ site.baseurl }}{% link players/troubleshooting.md %}) |
+| Mod authors | [Quickstart]({{ site.baseurl }}{% link mod-authors/quickstart.md %}) | [Mod authors overview]({{ site.baseurl }}{% link mod-authors.md %}) |
+| API (Lua) | [Lua API]({{ site.baseurl }}{% link mod-authors/lua-api.md %}) | [Quick reference]({{ site.baseurl }}{% link quick-reference.md %}) |
+| API (native) | [Native C API]({{ site.baseurl }}{% link mod-authors/native-api.md %}) | [Glossary]({{ site.baseurl }}{% link glossary.md %}) |
+| Publishing | [Publishing a mod]({{ site.baseurl }}{% link mod-authors/publishing.md %}) | [Release checklist]({{ site.baseurl }}{% link mod-authors/publishing.md %}#release-checklist) |
+| History | [Changelog]({{ site.baseurl }}{% link changelog.md %}) | |
 
 ## Downloads are binaries only
 

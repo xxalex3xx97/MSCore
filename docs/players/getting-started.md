@@ -70,7 +70,7 @@ The manager never downloads anything when the game starts. It only checks. Downl
 
 ## 7. Start the game
 
-Load a world and wait about 8 seconds. MSCore writes `ue4ss\Mods\MSCore\selfcheck.log`. Open it to see whether the check passed. See [Troubleshooting]({% link players/troubleshooting.md %}) if it did not.
+Load a world and wait about 8 seconds. MSCore writes `ue4ss\Mods\MSCore\selfcheck.log`. Open it to see whether the check passed. See [Troubleshooting]({{ site.baseurl }}{% link players/troubleshooting.md %}) if it did not.
 
 {: .warning }
 **Not verified in game:** the in-game update notice line in the UE4SS log. The manager update flow was tested with the game closed.

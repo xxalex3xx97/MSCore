@@ -153,6 +153,6 @@ The script writes `manifest.txt` with `name`, `version`, `zip`, `sha256`, `size`
 
 ## Caching
 
-GitHub serves release assets through a CDN that caches them. The manager adds `?t=<unix time>` to the manifest URL so it always reads the current file. Version 0.5.1 fixed a bug where that query string was dropped. Before 0.5.1, an old manifest could be read after a new release. See [Stale cache]({% link players/troubleshooting.md %}#stale-cache).
+GitHub serves release assets through a CDN that caches them. The manager adds `?t=<unix time>` to the manifest URL so it always reads the current file. Version 0.5.1 fixed a bug where that query string was dropped. Before 0.5.1, an old manifest could be read after a new release. See [Stale cache]({{ site.baseurl }}{% link players/troubleshooting.md %}#stale-cache).
 
 Publish the new release before you tell players to check for updates. Assets already in the CDN keep their old content for a while after a re-upload.

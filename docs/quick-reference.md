@@ -5,7 +5,7 @@ nav_order: 4
 
 # Quick reference
 
-The most used calls, grouped. Each name links to the full page in the [Lua API]({% link mod-authors/lua-api.md %}) or the [Native C API]({% link mod-authors/native-api.md %}).
+The most used calls, grouped. Each name links to the full page in the [Lua API]({{ site.baseurl }}{% link mod-authors/lua-api.md %}) or the [Native C API]({{ site.baseurl }}{% link mod-authors/native-api.md %}).
 
 ## Start a mod
 
@@ -101,4 +101,4 @@ MSCore.require(1)
 | **Remove mod** | Remove a mod's files. |
 
 {: .note }
-Close the game before install, add, remove or rollback. See [Getting started]({% link players/getting-started.md %}).
+Close the game before install, add, remove or rollback. See [Getting started]({{ site.baseurl }}{% link players/getting-started.md %}).

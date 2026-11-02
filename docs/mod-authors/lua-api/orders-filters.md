@@ -46,4 +46,4 @@ end
 ## Gotchas
 
 - `orders.new` does not return the new order id.
-- `orders.autopilot` takes a boolean. The native `autopilot` takes `0` or `1` (see [Native bridge]({% link mod-authors/lua-api/native-bridge.md %})).
+- `orders.autopilot` takes a boolean. The native `autopilot` takes `0` or `1` (see [Native bridge]({{ site.baseurl }}{% link mod-authors/lua-api/native-bridge.md %})).

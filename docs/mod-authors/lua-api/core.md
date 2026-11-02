@@ -44,4 +44,4 @@ log("ok =", tostring(ok), "value =", tostring(v))
 
 - Put `MSCore.require(n)` at the top of `main.lua`. It stops the mod early when the installed API is older.
 - Check `MSCore.native` before you use it: `if MSCore.native then ... end`. It is `nil` when the DLL is missing.
-- `safe.try` in [Safe and objects]({% link mod-authors/lua-api/safe-objects.md %}) does the same job as `try`.
+- `safe.try` in [Safe and objects]({{ site.baseurl }}{% link mod-authors/lua-api/safe-objects.md %}) does the same job as `try`.

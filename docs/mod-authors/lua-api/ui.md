@@ -35,5 +35,5 @@ local red = MSCore.ui.rgba(255, 0, 0)
 
 ## Gotchas
 
-- The click handler uses the `ForceLayoutPrepass` hook. This is a workaround. It is listed in `hacks` as `click_hook` (see [Units and hacks]({% link mod-authors/lua-api/units-hacks.md %})).
+- The click handler uses the `ForceLayoutPrepass` hook. This is a workaround. It is listed in `hacks` as `click_hook` (see [Units and hacks]({{ site.baseurl }}{% link mod-authors/lua-api/units-hacks.md %})).
 - `ui.rgba` takes sRGB values from 0 to 255, not 0 to 1.
