@@ -1,0 +1,13 @@
+title: MSCore Docs
+description: Shared helpers, mod manager and native API for Main Sequence Demo UE4SS mods
+url: https://xxalex3xx97.github.io
+baseurl: /MSCore
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+color_scheme: dark
+search_enabled: true
+aux_links:
+  "GitHub repository": "https://github.com/xxalex3xx97/MSCore"
+  "Releases (downloads)": "https://github.com/xxalex3xx97/MSCore/releases"
+aux_links_new_tab: true
