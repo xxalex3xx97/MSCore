@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.7.5 - Blueprint Unit refund and charge redirect
+
+Includes everything since 0.7.0 (0.7.1 to 0.7.4 were not released on their own).
+
+- **New (default ON):** with a Blueprint Unit container in a station, deconstruction refunds go into the unit first, then your inventory. Machine build costs are taken from the unit first, then from inventory. Turn off with the file `Mods/MSCore/refund_redirect_off.txt`. The redirect needs the Blueprint Unit container (`BP_BPUnitStoreObj_01_C`) to do anything.
+- **Confirmed in game:** refund redirect works with Blueprint Unit (2026-11-07).
+- **New:** `inv_move` takes an optional receiver (the player object id, Lua 5th argument, C export `MSCore_inv_move_to`). Calls without it still send receiver 0, which the game drops silently.
+- **New:** native station read (`MSCore.native.read_station`, `MSCore.factory_native.read_station`) and native inventory read (`read_inventory`). `MSCore.inv.slots` uses the native read when present.
+- **Fixed:** the `MSCoreNative_*` Lua globals (`MSCore.native`) are registered in every Lua mod, not only MSCore. Other mods can use `cmd.send` and the factory natives.
+- **Experimental, off by default:** refund probe (log only, `refund_probe.txt`). It logs what the redirect would do.
+- **Known limitation, co-op:** the game is lockstep. Every player needs 0.7.5 with the redirect on and the Blueprint Unit container pak, or refunds and charges land in different inventories and the game desyncs. Designer (blueprint) and teardown paths are untested.
+- **Not yet run in game (standalone):** native station read, native inventory read, the lua globals fix, the probe. Lua syntax and the fake-function harness only.
+- **Blueprint Unit (separate mod, not part of this release):** container contents restore is parked and experimental, off by default (`Mods/BlueprintUnit/restore_on.txt`).
+
 ## 0.7.0 - Factory API
 - **New:** native API 4 (`MSCore_api()` returns 4): typed command send (`MSCore_send_typed`) and factory senders: `find_buildable`, `build_place`, `disassemble`, `set_recipe`, `port_toggle`, `inv_move`. Lua: `cmd.send_typed`, `MSCore.factory.native`.
 - **New:** `MSCore.factory`: footprints, placement check, machine config encoding, recipes.
