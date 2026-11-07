@@ -14,6 +14,7 @@ MSCore gives your UE4SS Lua mod and your native mod shared helpers, so every mod
 | [Lua API]({{ site.baseurl }}{% link mod-authors/lua-api.md %}) | You need a Lua function. Overview plus one page per module group. |
 | [Native C API]({{ site.baseurl }}{% link mod-authors/native-api.md %}) | You call `MSCore_*` exports from a C++ mod. |
 | [Publishing a mod]({{ site.baseurl }}{% link mod-authors/publishing.md %}) | You build a zip, a manifest and a GitHub release. |
+| [Game internals]({{ site.baseurl }}{% link mod-authors/game-internals.md %}) | You want to know how the game handles commands, inventories, refunds and builds. |
 | [Quick reference]({{ site.baseurl }}{% link quick-reference.md %}) | You want the most used calls on one page. |
 | [Glossary]({{ site.baseurl }}{% link glossary.md %}) | You meet a term you do not know. |
 
