@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.1 - Refund redirect only on demand
+
+- **Fixed:** deconstructing something by hand put the refund into the Blueprint Unit instead of your inventory. The refund redirect was switched on from game start, so it caught every deconstruction in a station with a Blueprint Unit.
+- **Changed:** the redirect is now off at game start. A mod that needs it calls `redirect_enable(true)` and must turn it off again (Blueprint Unit does this around its own builds, so its builds still take costs from the unit first). The file `Mods/MSCore/refund_redirect_on.txt` brings back the old always-on behaviour; `refund_redirect_off.txt` still blocks the start-time switch-on.
+- **Confirmed in game:** hand deconstruction refunds go to your inventory, and Blueprint Unit builds still charge the unit first (2026-11-08).
+- Native API stays 5, Lua API 3.
+
 ## 0.8.0 - Station block natives
 
 - **New:** station block natives for Blueprint Unit's Station Build: `MSCore.native.add_block`, `remove_block`, `pending` (reset or apply the pending blueprint) and `read_block_class` (class data: bounds, cost, station block or not), with wrappers in `MSCore.factory_native`. C++ native API is now 5.
