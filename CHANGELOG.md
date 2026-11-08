@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.0 - Station block natives
+
+- **New:** station block natives for Blueprint Unit's Station Build: `MSCore.native.add_block`, `remove_block`, `pending` (reset or apply the pending blueprint) and `read_block_class` (class data: bounds, cost, station block or not), with wrappers in `MSCore.factory_native`. C++ native API is now 5.
+- **New:** `read_station` block lines carry the full class path as an optional 7th column (older 6-column lines still parse).
+- **Fixed:** the click hook of MSCore windows is removed with a short delay and a reopen cancels the removal. Buttons the engine no longer knows are skipped instead of bound. This targets a crash that happened when the dev menu inventory panel was opened again.
+- **Confirmed in game:** with Blueprint Unit, a Station 1x1 was placed where a Shipyard side stood (the side was removed first), 2026-11-08.
+- **Not yet confirmed:** the click-hook crash fix (needs a few open/close rounds of the dev menu).
+- **Known limits:** blocks of other classes and rotations were not tried in game.
+
 ## 0.7.6 - Local inventory split, camera block, Dock_2 floor
 
 - **New:** native inventory split (`MSCore.native.inv_split`, `MSCore.factory_native.inv_split`, C export `MSCore_inv_split`). Moves an amount of items from one slot to an EMPTY slot of the same inventory. It is a LOCAL edit, so co-op clients do not see it: use it in single-player only. Co-op desync is accepted for this version. Needed by Blueprint Unit 0.2.0 (local inventory split).
