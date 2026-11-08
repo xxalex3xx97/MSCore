@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.6 - Local inventory split, camera block, Dock_2 floor
+
+- **New:** native inventory split (`MSCore.native.inv_split`, `MSCore.factory_native.inv_split`, C export `MSCore_inv_split`). Moves an amount of items from one slot to an EMPTY slot of the same inventory. It is a LOCAL edit, so co-op clients do not see it: use it in single-player only. Co-op desync is accepted for this version. Needed by Blueprint Unit 0.2.0 (local inventory split).
+- **New:** while an MSCore window is open the camera look is blocked. Closing the window restores the previous setting.
+- **Fixed:** Dock_2 floor is 30x30, and a footprint across touching floors validates against the padded floor union.
+- **Fixed:** binary config bytes containing a NUL were cut at the first NUL, so machine configs, recipes and ports never reached the game. Blueprint Unit 0.2.0 needs MSCore 0.7.6 for this.
+- **Not yet run in game:** inv_split, the camera block, the Dock_2 floor. Lua tests only; the NUL fix is checked by code read.
+- **Known limits:** inv_split is single-player only (see above). A WBP window destroyed without close (death, load) may leave the camera input setting until the next window open/close.
+
 ## 0.7.5 - Blueprint Unit refund and charge redirect
 
 Includes everything since 0.7.0 (0.7.1 to 0.7.4 were not released on their own).
