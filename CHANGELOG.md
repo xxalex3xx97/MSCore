@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.2 - Events tick on the game thread
+
+- **Fixed:** the events tick no longer runs Lua on UE4SS's async thread. That thread could corrupt the shared Lua state during long imports in other mods (Blueprint Unit). The tick now runs on the game thread.
+- Native API stays 5, Lua API 3.
+- **Not yet run in game:** the 0.8.2 fix. Checked by Lua syntax and code review only.
+
 ## 0.8.1 - Refund redirect only on demand
 
 - **Fixed:** deconstructing something by hand put the refund into the Blueprint Unit instead of your inventory. The refund redirect was switched on from game start, so it caught every deconstruction in a station with a Blueprint Unit.
