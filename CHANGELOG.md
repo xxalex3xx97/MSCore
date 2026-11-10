@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.8.3 - Dock names
+
+- **New:** `MSCore.factory_native.rename_dock(receiverId, text)` renames a dock, industrial dock or shipyard dock the same way the game's own rename window does. The name is built natively, never through Lua (a Lua version crashed the game).
+- **New:** `MSCore.factory_native.read_docks(stationId)` lists the docks of one station as `{machine_id, block_id, parent_id, class, name, raw_id}`.
+- **New:** the station read gives each block its BlockID (`bid`, `-1` when unreadable) and the MachineIDs of its child machines (`mids`). A dock's own BlockID can read `-1`, so match a block to its dock through `mids`.
+- **New:** the self check reports the dock read and how many blocks link to a dock. It no longer walks game structures from Lua (a build of this release that did crashed the game; removed before release).
+- **Confirmed in game:** the block-to-dock link matched 20 of 20 docks on a real station, and renaming docks works, including a dock placed by Station Build (2026-11-10).
+- Native API 6 (the new calls are Lua only), Lua API 3.
 ## 0.8.2 - Events tick on the game thread
 
 - **Fixed:** the events tick no longer runs Lua on UE4SS's async thread. That thread could corrupt the shared Lua state during long imports in other mods (Blueprint Unit). The tick now runs on the game thread.
