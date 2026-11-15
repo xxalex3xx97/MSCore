@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.4 - Quiet install
+
+- **Changed:** a fresh install no longer shows the UE4SS console and logger windows. The `UE4SS-settings.ini` that ships with MSCore has `ConsoleEnabled`, `GuiConsoleEnabled` and `GuiConsoleVisible` set to `0`.
+- The manager never overwrites an existing `UE4SS-settings.ini`. If you already have one, your console stays until you set those three lines to `0` yourself.
+- No API change: native API 6, Lua API 3. Not yet run in game.
+
 ## 0.8.3 - Dock names
 
 - **New:** `MSCore.factory_native.rename_dock(receiverId, text)` renames a dock, industrial dock or shipyard dock the same way the game's own rename window does. The name is built natively, never through Lua (a Lua version crashed the game).
