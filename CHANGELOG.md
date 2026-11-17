@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.6 - Update-proof addresses
+
+- **Changed:** the refund redirect and the inventory split no longer depend on fixed game addresses or an exe size check. The functions they call, the group type and the player Inventory / creative-flag offsets are found when the game starts. If one cannot be found the feature turns off and the log says which (`COMPAT ...`), instead of running on a wrong address.
+- **New:** one `COMPAT CAPS` line in the log lists what was found (chunk hold, refund; split and player offsets appear on first use).
+- Refund redirect run in game on the current build; inventory split not yet.
+
 ## 0.8.5 - Game update compat
 
 - **Fixed:** the refund redirect works again on the new game build (exe size 149299200). On the new build MSCore refused to start it ("COMPAT refund failed: exe size") and the Blueprint Unit fell back to its legacy build flow. The exe size check, the function addresses and the player creative-flag offset now follow the new game build.
