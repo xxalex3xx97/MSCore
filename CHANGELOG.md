@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.5 - Game update compat
+
+- **Fixed:** the refund redirect works again on the new game build (exe size 149299200). On the new build MSCore refused to start it ("COMPAT refund failed: exe size") and the Blueprint Unit fell back to its legacy build flow. The exe size check, the function addresses and the player creative-flag offset now follow the new game build.
+- No API change. Not yet run in game beyond a Blueprint Unit build click.
+
 ## 0.8.4 - Quiet install
 
 - **Changed:** a fresh install no longer shows the UE4SS console and logger windows. The `UE4SS-settings.ini` that ships with MSCore has `ConsoleEnabled`, `GuiConsoleEnabled` and `GuiConsoleVisible` set to `0`.
