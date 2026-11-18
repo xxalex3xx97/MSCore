@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.8 - Dock filters
+
+- **New:** `MSCore.factory_native.set_dock_filter(receiverId, index, itemName, bLoading)` sets a dock's item filter the way the game's own dock window does. The Blueprint Unit 0.4.3 uses it to apply dock filters when you paste a station.
+- No API change: native API 7, Lua API 3. Run in game through a Blueprint Unit paste.
+
 ## 0.8.7 - Chunk hold radius, safer modules
 
 - **New:** C export `MSCore_chunk_hold2(owner, sys, ch3, radius, err, errlen)`. Radius 1 = 3x3x3 chunks (same as `MSCore_chunk_hold`), radius 0 = the centre chunk only.
