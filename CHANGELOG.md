@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.7 - Chunk hold radius, safer modules
+
+- **New:** C export `MSCore_chunk_hold2(owner, sys, ch3, radius, err, errlen)`. Radius 1 = 3x3x3 chunks (same as `MSCore_chunk_hold`), radius 0 = the centre chunk only.
+- **New:** `MSCore.hook` in Lua: a RegisterHook wrapper that never throws and reports through a `COMPAT` capability line.
+- **Changed:** every export is guarded: an error in one feature turns only that feature off (one `COMPAT` line names it) and never takes other modules or mods down. The refund redirect, command ids and renames read and write game memory through guarded accessors.
+- **Changed:** command type ids now live in one place and their class layout is checked before the first use. If it does not match, commands turn off and the log says so instead of writing to a wrong place.
+- **Fixed:** after a Blueprint Unit run the refund redirect no longer stays on: manual build and deconstruct refunds go back to your inventory 8 seconds after the last redirected item.
+- Native API 7, Lua API 3. Refund redirect, idle drain and build charge run in game; chunk hold radius used in game with the Mining Bench Mod (no faults). The guarded command ids are not fully run in game yet.
+
 ## 0.8.6 - Update-proof addresses
 
 - **Changed:** the refund redirect and the inventory split no longer depend on fixed game addresses or an exe size check. The functions they call, the group type and the player Inventory / creative-flag offsets are found when the game starts. If one cannot be found the feature turns off and the log says which (`COMPAT ...`), instead of running on a wrong address.
