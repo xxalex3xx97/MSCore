@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.9 - Widgets by logical name
+
+- **New:** game widgets (inventory grid, item amount, fleet ship entry, pause menu) are found by one logical name each, from a single table inside MSCore, then by name. If a game update renames one, only MSCore needs the fix. The Mining Unit window and the Blueprint Unit use it.
+- **New:** `COMPAT CAPS widgets=ok` in the log, and a kill switch that turns only the widget module off.
+- No API break: Lua API 3 (additions only), native API 7. Mod windows run in game with this build.
+
 ## 0.8.8 - Dock filters
 
 - **New:** `MSCore.factory_native.set_dock_filter(receiverId, index, itemName, bLoading)` sets a dock's item filter the way the game's own dock window does. The Blueprint Unit 0.4.3 uses it to apply dock filters when you paste a station.
