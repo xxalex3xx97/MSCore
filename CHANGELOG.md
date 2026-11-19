@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.8.12 - Ship shields
+
+- **New:** a ship's current and max shield can be read through MSCore (`MSCore_ship_shields`), in its own `ships` module with a capability line `COMPAT CAPS ... ships=ok` in the log and a kill switch that turns only that module off.
+- **New:** the ship class is looked up by logical name (`MSCore.class("ship")`), like asteroids and stations. After a game update only MSCore needs the fix.
+- **New:** `factory_native.rename_ship(shipId, text)` renames a ship (Lua).
+- Native API 9, Lua API 3 (additions only). The `ships` module self-test passes in game (`ships=ok`); a live shield value in a fight was not yet seen.
+
 ## 0.8.11 - Hook crash fix, class names and rock scan
 
 - **Fixed:** a crash when a mod window and the dev menu were opened in turn. The layout hook is registered once and kept, instead of being removed and registered again on every open.
