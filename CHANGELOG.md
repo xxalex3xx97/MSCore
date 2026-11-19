@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.11 - Hook crash fix, class names and rock scan
+
+- **Fixed:** a crash when a mod window and the dev menu were opened in turn. The layout hook is registered once and kept, instead of being removed and registered again on every open.
+- **New (0.8.10):** the game class names for asteroids, stations, containers and the research block live in one table inside MSCore and are looked up by logical name (`MSCore.class`). Native rock scan (`MSCore_scan_rocks` / `MSCore.rocks`) with a `rocks` capability and a layout check that turns it off safely. `COMPAT CAPS ... rocks=ok` in the log.
+- Native API 8, Lua API 3 (additions only). Run in game with the Mining Bench Mod and Blueprint Unit.
+
 ## 0.8.9 - Widgets by logical name
 
 - **New:** game widgets (inventory grid, item amount, fleet ship entry, pause menu) are found by one logical name each, from a single table inside MSCore, then by name. If a game update renames one, only MSCore needs the fix. The Mining Unit window and the Blueprint Unit use it.
