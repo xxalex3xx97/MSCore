@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.14 - Game update 2026-11-20
+
+- **Works with the 2026-11-20 game update.** MSCore re-checked every game hook against the new game build: nothing needed a new pattern, and the self-check is all green (no false "BROKEN" for `rename_ship` any more).
+- **New:** `world` module: MSCore can tell whether the game is paused (export `MSCore_world_paused`). Mining Bench Mod uses it so a long pause no longer makes a ship's trip fail with "clear timeout".
+- Native API 10, Lua API 3 (additions only). Verified in game: self-check ok=80, broken=0, and a 7-ship park-and-pause test.
+
 ## 0.8.13 - Flight module and required mods
 
 - **New:** MSCore Manager installs required mods automatically. A mod can list the mods it needs (`requires=` in its manifest); Add and Update install the missing ones first, stop with a clear message if one is not available, and Remove warns which installed mods depend on the one you remove. A mod that lost a required mod shows up in the list and Update repairs it. New command line option `--update <ModName>`.
