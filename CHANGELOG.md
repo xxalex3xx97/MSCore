@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.13 - Flight module and required mods
+
+- **New:** MSCore Manager installs required mods automatically. A mod can list the mods it needs (`requires=` in its manifest); Add and Update install the missing ones first, stop with a clear message if one is not available, and Remove warns which installed mods depend on the one you remove. A mod that lost a required mod shows up in the list and Update repairs it. New command line option `--update <ModName>`.
+- **New:** `flight` module: one safe read of a ship's flight state (position and orientation, throttle and steps, autopilot flags, collision radius, power) and exports to set the throttle, zero the controls and find the pilot console. `COMPAT CAPS ... flight=ok` in the log, own kill switch. Used by ShipControl; game names for ship flight now live only in MSCore.
+- Native API 10, Lua API 3 (additions only). Verified in game with Mining Bench Mod 0.3.0 and ShipControl 0.3.0 (miners approach, mine, reroute and brake as before).
+
 ## 0.8.12 - Ship shields
 
 - **New:** a ship's current and max shield can be read through MSCore (`MSCore_ship_shields`), in its own `ships` module with a capability line `COMPAT CAPS ... ships=ok` in the log and a kill switch that turns only that module off.
