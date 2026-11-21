@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.8.15 - Holograms, fleets, rock registry, manager clean-up, designer fix
+
+- **Fixed:** the game crashed with an access violation (0x110) when opening the ship or station design editor. MSCore now guards the game function behind it (`MSCore.designer`, own kill switch). Tested in game on ship and station designers.
+- **New:** rock registry service (native API 16): one shared, fast list of asteroids for mods (`MSCore_rockreg_*`). Tested in game.
+- **New:** ship holograms and item icons for mod windows, fleets (fleet window, add-to-fleet, native fleet read and commands), ship repair, station names, ship hull export and mining capability flags (native API 15).
+- **Manager:** Remove now cleans up what a mod left behind (including files in other folders) and scrubs the mod's block classes from saves and designs, with a backup first, so the game no longer crashes on load. Disable moves the mod's files out of the game folders so the game really stops loading it. The manager shows its version in the title and a label, and updates itself (checkbox "Auto-update manager", `--self-update`).
+- Native API 16, Lua API 3 (additions only).
+- Not yet run in game: the manager self-update.
+
 ## 0.8.14 - Game update 2026-11-20
 
 - **Works with the 2026-11-20 game update.** MSCore re-checked every game hook against the new game build: nothing needed a new pattern, and the self-check is all green (no false "BROKEN" for `rename_ship` any more).
