@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.2 - Manager auto-update fix
+
+- **Fixed:** the manager's startup self-update was silently dropped when it arrived while the startup mod check was still running, so the manager never updated itself by itself. It now waits for the check to finish and then updates. Tested: the GUI replaced a 0.9.0-labelled build with the released manager and restarted.
+- Managers 0.9.0 and 0.9.1 still have this bug: update them once by hand (download `MSCoreManager.exe` from this release, or run `MSCoreManager.exe --self-update`). From 0.9.2 on it updates itself.
+
 ## 0.9.1 - Remove mod fix
 
 - **Fixed:** Remove mod refused or could leave broken references in some saves (stray modded class entries inside embedded designs, or all spare classes already used). The modded class slot in the save now points at the stock class, so other references to it land on the stock class too.
