@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.9.0 - UE4SS 4.0.0
+
+- **Changed:** MSCore and the manager now run on UE4SS 4.0.0. The release ships `ue4ss-4.0.0.zip` and the manager installs it. Tested in game by the author (selfcheck ok=97, broken=0).
+- **New:** the manager and the in-game loader refuse to run on an older UE4SS, with a message that says which version is needed (`min_ue4ss`).
+- **New (mods):** ballistics (`MSCore_ship_guns`, `MSCore_sim_rate`), enemy stations (`MSCore_enemy_stations`), floaters (`MSCore_floaters`), chunk stats (`MSCore_chunk_stats`) and dock kind (`MSCore_dock_kind`). Each module has its own kill switch.
+- **Changed:** the chunk hold cap is removed (the real limit is what the game can load). `MSCore_enemy_velocity` and `MSCore_enemy_motion` now use the measured sim rate (speeds were about 2.7x too high).
+- **Dev only:** DevEval, a runtime probe tool that stays off unless `Mods\MSCore\deveval_on.txt` exists.
+- Native API 28 (was 16), Lua API 3 (additions only).
+- Mods built for UE4SS 3.x may need an update for UE4SS 4.0.0.
+- Not yet run in game: floaters and enemy stations.
 ## 0.8.15 - Holograms, fleets, rock registry, manager clean-up, designer fix
 
 - **Fixed:** the game crashed with an access violation (0x110) when opening the ship or station design editor. MSCore now guards the game function behind it (`MSCore.designer`, own kill switch). Tested in game on ship and station designers.
