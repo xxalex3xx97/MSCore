@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.1 - Remove mod fix
+
+- **Fixed:** Remove mod refused or could leave broken references in some saves (stray modded class entries inside embedded designs, or all spare classes already used). The modded class slot in the save now points at the stock class, so other references to it land on the stock class too.
+- Tested in game on one save that failed before (loads, designer opens). Other saves are checked by the scrubber's own verification only.
+
 ## 0.9.0 - UE4SS 4.0.0
 
 - **Changed:** MSCore and the manager now run on UE4SS 4.0.0. The release ships `ue4ss-4.0.0.zip` and the manager installs it. Tested in game by the author (selfcheck ok=97, broken=0).
