@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.4 - Station zones
+
+- **Added:** `MSCore_station_zones` (native API 29): the positions of your own stations, for mods that keep mining ships away from them. Abandoned and NPC stations are not listed. Module `stshield`, kill switch `Mods/MSCore/stshield_off.txt`.
+- Existing exports are unchanged. Not yet run in game beyond the mining mod's station safe bubble test.
+
 ## 0.9.3 - Rock registry fix
 
 - **Fixed:** the rock registry world could fail to load in sessions that start while piloting a ship (a stale menu controller was kept), so rock-dependent features stayed idle. It now looks the controller up again until it has a live player. Not yet run in game.
