@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.5 - Clean removal
+
+- **Changed:** Remove is for good. The mod's whole `Mods\<folder>` (and every other `Mods\` folder its package shipped) is deleted, settings, data files and logs included. A folder that still holds another mod's `mscore.mod` is never touched, and MSCore is never removed. The confirm box says so. Save backups under `MSCore\save-backup` are kept.
+- **Changed:** Remove is refused while another installed mod requires the mod (the message names them), and it also removes every dependency that no remaining mod needs (the confirm box lists them). One save scrub covers every mod removed.
+- Not yet run in game. A mod installed by hand or by a dev build has no complete install list, so Remove only deletes the files that list names: reinstall it once through the manager to get a full list.
+
 ## 0.9.4 - Station zones
 
 - **Added:** `MSCore_station_zones` (native API 29): the positions of your own stations, for mods that keep mining ships away from them. Abandoned and NPC stations are not listed. Module `stshield`, kill switch `Mods/MSCore/stshield_off.txt`.
